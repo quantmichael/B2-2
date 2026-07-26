@@ -93,10 +93,9 @@ Data Structure 예시
 {{2.url}}
 ```
 
-## 6. 최종 시나리오
+## 6. MAKE 워크플로우
 
-Scheduler → Google News RSS → Keyword Filter → Notion Search → Duplicate
-Filter → Gemini AI → Parse JSON → Notion Create Database Item → Discord
+![MAKE 워크플로우](./bonus.png)
 
 ## 7. 실행 결과
 
