@@ -71,17 +71,11 @@ Data Structure 예시
 Notion Create Database Item 모듈에서 아래와 같이 매핑합니다.
 
 | Notion 속성 | Make 매핑 |
-
 | :---------- | :-------- |
-
 | 제목 | RSS Title |
-
 | 링크 | RSS URL |
-
 | GUID | RSS GUID |
-
 | 요약 | Parse JSON → summary |
-
 | 감성 | Parse JSON → sentiment |
 
 ## 5. Discord 메시지
