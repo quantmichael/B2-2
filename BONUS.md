@@ -68,13 +68,19 @@ Data Structure 예시
 
 ## 4. Notion 저장
 
-  Notion 속성   매핑 값
-  ------------- ------------------------
-  제목          RSS Title
-  링크          RSS URL
-  GUID          RSS GUID
-  요약          Parse JSON → summary
-  감성          Parse JSON → sentiment
+| Notion 속성 | 매핑 값 |
+
+|------------|---------------------------|
+
+| 제목 | RSS Title |
+
+| 링크 | RSS URL |
+
+| GUID | RSS GUID |
+
+| 요약 | Parse JSON → summary |
+
+| 감성 | Parse JSON → sentiment |
 
 ## 5. Discord 메시지
 
