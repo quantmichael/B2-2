@@ -79,7 +79,9 @@ Make의 Scheduler를 이용하여 설정한 주기에 맞춰 시나리오가 자
 
 본 프로젝트에서는 아래와 같이 설정했습니다.
 
-- 실행 주기: `Every 15 minutes`
+- 실행 주기: `Every day`
+- 실행 시간: `09:00`
+- 타임존: `Asia/Seoul`
 
 ### 캡처 2. Scheduler 설정
 
