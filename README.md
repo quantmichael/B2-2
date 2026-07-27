@@ -31,7 +31,7 @@
 | 뉴스 수집 | Google News RSS | 다양한 언론사의 최신 뉴스 수집 |
 | AI 가공 | Google Gemini AI | 뉴스 핵심 내용 요약 |
 | 데이터 저장 | 노션 Database | 뉴스 제목, 요약, 링크, 발행일, 출처, GUID 저장 |
-| 알림 | Discord Webhook | 요약 결과를 채널로 자동 전송 |
+| 알림 | Discord Send a Message 모듈 | 요약 결과를 채널로 자동 전송 |
 | 협업 및 문서 관리 | GitHub | README와 프로젝트 자료 관리 |
 
 ---
@@ -57,12 +57,17 @@ Duplicate Filter
       │
       ▼
 Google Gemini AI
+(요약 및 감성 분석)
+      │
+      ▼
+Parse JSON
+(summary / sentiment 분리)
       │
       ▼
 노션 Database 저장
       │
       ▼
-Discord Webhook 전송
+Discord Send a Message 전송
 ```
 
 ### 캡처 1. Make 전체 워크플로우
@@ -106,7 +111,7 @@ RSS에서 활용한 주요 데이터는 다음과 같습니다.
 - 발행일
 - 뉴스 출처
 - GUID
-- 기사 설명 또는 본문 데이터
+- RSS에서 제공하는 기사 설명 데이터
 
 ---
 
@@ -130,8 +135,6 @@ RSS에서 수집되는 모든 뉴스를 요약하지 않고, 프로젝트 주제
 - Claude
 - 머신러닝
 
-> 위 목록은 보고서 작성 예시입니다. 제출 전 실제 Make 필터에 등록한 키워드와 동일한지 확인하고 수정합니다.
-> 
 
 #### 선택 이유
 
@@ -210,7 +213,7 @@ Equal to
 다음 뉴스를 분석해 주세요.
 
 1. 뉴스 핵심 내용을 3줄 이내로 요약하세요.
-2. 감성을 긍정, 부정, 중립 중 하나로 분류하세요.
+2. 감성을 긍정, 중립, 부정 중 하나로 분류하세요.
 3. 반드시 아래 JSON 형식으로만 출력하세요.
 4. ```json 같은 코드 블록은 사용하지 마세요.
 5. JSON 앞뒤에 설명을 추가하지 마세요.
@@ -256,7 +259,7 @@ Parse JSON 모듈을 사용하지 않을 경우 Gemini AI의 반환값 전체가
 
 ### 캡처 7. Parse JSON 설정
 
-![노션 데이터베이스 구조](images/07_parse_json.png)
+![Parse JSON 설정](images/07_parse_json.png)
 
 ### **5.7 노션 데이터베이스 저장**
 
@@ -282,17 +285,17 @@ Google News RSS에서 제공하는 언론사 정보를 활용하기 위해 **출
 
 ### **캡처 8. 노션 데이터베이스 구조**
 
-![노션 저장 결과](images/08_notion_database_fields.png)
+![노션 데이터베이스 구조](images/08_notion_database_fields.png)
 
 ### 캡처 9. 노션 저장 결과
 
-![Discord 전송 결과](images/09_notion_result.png)
+![노션 저장 결과](images/09_notion_result.png)
 
 ---
 
 ### 5.8 Discord 자동 알림
 
-노션 데이터베이스 저장이 완료된 신규 뉴스는 Discord Webhook을 통해 지정된 Discord 채널로 자동 전송되도록 구성했습니다.
+노션 데이터베이스 저장이 완료된 신규 뉴스는 Discord Send a Message를 통해 지정된 Discord 채널로 자동 전송되도록 구성했습니다.
 
 Discord 모듈에서는 Parse JSON 모듈에서 분리한 뉴스 요약과 감성 분석 결과, 그리고 RSS에서 수집한 뉴스 정보를 매핑하여 메시지를 생성하도록 설정했습니다.
 
@@ -327,7 +330,6 @@ Discord 메시지에는 다음 정보를 포함하도록 구성했습니다.
 | AI 키워드 조건을 만족하지 않는 경우 | 필터에서 처리를 종료 | 프로젝트 주제와 무관한 뉴스 제외 |
 | 동일 GUID가 이미 존재하는 경우 | Gemini, 노션 저장, Discord 전송을 실행하지 않음 | 중복 저장과 중복 알림 및 AI 호출 방지 |
 | Gemini 또는 외부 서비스 오류 | Make 실행 이력에서 오류 모듈과 데이터를 확인하고 재실행 | 오류 위치를 추적하고 안정적으로 복구 |
-| 재시도가 필요한 경우 | 동일 기사에 대한 재시도는 최대 2회 이내로 제한하는 정책을 적용 | 무한 반복과 불필요한 API 비용 방지 |
 | API 키 및 토큰 | Make Connection을 통해 비공개 관리 | 문서와 화면에서 인증정보 노출 방지 |
 
 ---
@@ -343,6 +345,8 @@ Discord 메시지에는 다음 정보를 포함하도록 구성했습니다.
 | GUID 신규 기사 검색 | 검색 결과 0건일 때 다음 단계 실행 | 정상 |
 | GUID 중복 기사 검색 | 기존 GUID가 있으면 처리 중단 | 정상 |
 | Gemini 요약 | 뉴스 핵심 내용이 3줄 이내로 생성됨 | 정상 |
+| Parse JSON 분리 | `summary`와 `sentiment`가 정상적으로 분리됨 | 정상 |
+| 감성 저장 | 노션 `Select` 속성에 감성(긍정 / 중립 / 부정)이 정상 저장됨 | 정상 |
 | 노션 저장 | 각 데이터가 올바른 속성에 저장됨 | 정상 |
 | 출처 저장 | 언론사 정보가 출처 필드에 저장됨 | 정상 |
 | Discord 전송 | 신규 뉴스 요약이 채널로 전송됨 | 정상 |
@@ -355,7 +359,8 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
 - Google News RSS 뉴스 수집
 - AI 관련 뉴스 필터링
 - GUID 기반 중복 저장 방지
-- Gemini AI 뉴스 요약
+- Gemini AI 뉴스 요약 및 감성 분석
+- Parse JSON을 이용한 요약·감성 데이터 분리
 - 노션 데이터베이스 저장
 - 출처 및 GUID 저장
 - Discord 자동 알림
@@ -375,7 +380,7 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
 | 데이터 변환 | Parse JSON을 이용하여 요약문과 감성 분석 결과를 분리 |
 | 중복 처리 | GUID를 이용하여 동일 뉴스의 중복 저장 방지 |
 | 데이터 저장 | 노션 Database에 제목, 요약, 감성, 링크, 발행일, 출처, GUID 자동 저장 |
-| 알림 | Discord Webhook을 이용하여 요약 및 감성 분석 결과를 자동 전송 |
+| 알림 | Discord Send a Message 모듈을 이용하여 요약 및 감성 분석 결과를 자동 전송 |
 
 ### **핵심 특징**
 
@@ -460,7 +465,7 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
 이미지 파일은 README와 같은 저장소의 `images` 폴더에 저장하고 다음과 같은 Markdown 문법으로 표시합니다.
 
 ```markdown
-!Make 전체 워크플로우
+![Make 전체 워크플로우](images/01_make_workflow.png)
 ```
 
 ---
@@ -469,8 +474,8 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
 
 - API 키와 토큰을 README 또는 공개 저장소에 입력하지 않습니다.
 - Make Connection을 이용하여 인증 정보를 관리합니다.
-- 캡처 화면에 API 키, Webhook URL, 노션 토큰 등 민감한 정보가 보이지 않도록 마스킹합니다.
-- Discord Webhook URL을 GitHub에 직접 업로드하지 않습니다.
+- 캡처 화면에 API 키, Connection 정보, 노션 토큰 등 민감한 정보가 보이지 않도록 마스킹합니다.
+- Discord 채널 및 인증 정보가 외부에 노출되지 않도록 관리합니다.
 - 노션 페이지 공유 범위와 데이터베이스 권한을 제출 전에 확인합니다.
 
 ---
