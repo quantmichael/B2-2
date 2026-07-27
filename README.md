@@ -31,7 +31,7 @@
 | 뉴스 수집 | Google News RSS | 다양한 언론사의 최신 뉴스 수집 |
 | AI 가공 | Google Gemini AI | 뉴스 핵심 내용 요약 |
 | 데이터 저장 | 노션 Database | 뉴스 제목, 요약, 링크, 발행일, 출처, GUID 저장 |
-| 알림 | Discord Send a Message 모듈 | 요약 결과를 채널로 자동 전송 |
+| 알림 | Discord | 요약 결과를 채널로 자동 전송 |
 | 협업 및 문서 관리 | GitHub | README와 프로젝트 자료 관리 |
 
 ---
@@ -67,7 +67,7 @@ Parse JSON
 노션 Database 저장
       │
       ▼
-Discord Send a Message 전송
+Discord 알림 전송
 ```
 
 ### 캡처 1. Make 전체 워크플로우
