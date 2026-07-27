@@ -249,3 +249,71 @@ ZDNet Korea
 **문제가 발생하거나 개선이 필요한 부분이 있으면 해당 단계와 오류 내용을 함께 공유해 주시면 검토 후 수정하겠습니다. 하다가 잘 안되시거나 궁금한 사항 있으시면 메시지 또는 평일 오전에 2층 창가(3-2-1-?) 자리로 와주세요** 
 
 ---
+
+좋은 피드백입니다. 기존 가이드를 크게 수정할 필요는 없고, Parse JSON 설명 바로 아래에 아래 내용을 추가하면 초보자들이 가장 많이 헷갈리는 부분을 예방할 수 있습니다. GUIDE.md
+
+⸻
+
+# 8. Parse JSON 연결 시 주의사항 (추가)
+
+Gemini Result를 직접 연결하지 마세요.
+
+Gemini AI는 다음과 같은 JSON 문자열을 반환합니다.
+
+{
+  "summary": "AI 뉴스입니다.",
+  "sentiment": "긍정"
+}
+
+이 상태에서 Gemini의 Result를 Notion이나 Discord에 직접 연결하면 JSON 원문이 그대로 출력됩니다.
+
+예시
+
+{
+  "summary": "AI 뉴스입니다.",
+  "sentiment": "긍정"
+}
+
+올바른 연결 방법
+
+Gemini 결과를 Parse JSON 모듈로 전달하면 다음과 같이 각각의 데이터가 생성됩니다.
+
+* Summary
+* Sentiment
+
+이후 Notion과 Discord에는 반드시 Parse JSON에서 생성된 Summary와 Sentiment 필드를 연결해야 합니다.
+
+Discord 출력 예시
+
+🤖 AI 요약
+AI 뉴스입니다.
+😄 감성
+긍정
+
+반드시 기억하세요.
+
+Gemini Result → 직접 연결 (X)
+
+Gemini Result
+        ↓
+Discord / Notion
+
+→ JSON 문자열이 그대로 출력될 수 있습니다.
+
+Parse JSON → Summary / Sentiment 연결 (O)
+
+Gemini Result
+        ↓
+Parse JSON
+        ↓
+Summary
+Sentiment
+        ↓
+Discord / Notion
+
+→ 원하는 형태로 깔끔하게 출력됩니다.
+
+많이 헷갈리는 부분입니다.
+Discord와 Notion에는 Gemini의 Result가 아니라 Parse JSON에서 생성된 Summary와 Sentiment를 연결해야 합니다.
+
+⸻
