@@ -254,7 +254,7 @@ Parse JSON 모듈을 사용하지 않을 경우 Gemini AI의 반환값 전체가
 
 ### 캡처 7. Parse JSON 설정
 
-![노션 데이터베이스 구조](images/07_notion_database_fields.png)
+![노션 데이터베이스 구조](images/07_parse_json.png)
 
 ### **5.7 노션 데이터베이스 저장**
 
@@ -280,11 +280,11 @@ Google News RSS에서 제공하는 언론사 정보를 활용하기 위해 **출
 
 ### **캡처 8. 노션 데이터베이스 구조**
 
-![노션 저장 결과](images/08_notion_result.png)
+![노션 저장 결과](images/08_notion_database_fields.png)
 
 ### 캡처 9. 노션 저장 결과
 
-![Discord 전송 결과](images/09_discord_result.png)
+![Discord 전송 결과](images/09_notion_result.png)
 
 ---
 
