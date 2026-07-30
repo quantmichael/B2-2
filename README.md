@@ -92,6 +92,10 @@ Make의 Scheduler를 이용하여 설정한 주기에 맞춰 시나리오가 자
 
 ![Scheduler 설정](images/02_scheduler.png)
 
+### 캡처 3. Scheduler 실행 이력
+
+![Scheduler 실행 이력](images/03_scheduler_history.png)
+
 ---
 
 ### 5.2 Google News RSS 수집
