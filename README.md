@@ -72,7 +72,7 @@ Discord 알림 전송
 
 ### 캡처 1. Make 전체 워크플로우
 
-![Make 전체 워크플로우](images/01_make_workflow.png)
+![Make 전체 워크플로우](images/make_workflow.png)
 
 ---
 
@@ -90,11 +90,11 @@ Make의 Scheduler를 이용하여 설정한 주기에 맞춰 시나리오가 자
 
 ### 캡처 2. Scheduler 설정
 
-![Scheduler 설정](images/02_scheduler.png)
+![Scheduler 설정](images/scheduler.png)
 
 ### 캡처 3. Scheduler 실행 이력
 
-![Scheduler 실행 이력](images/03_scheduler_history.png)
+![Scheduler 실행 이력](images/scheduler_history.png)
 
 ---
 
@@ -112,7 +112,7 @@ Google News RSS는 다양한 언론사의 최신 뉴스를 한 번에 수집할 
 
 ### 캡처 4. Google News RSS 설정
 
-![Google News RSS 설정](images/04_rss_setting.png)
+![Google News RSS 설정](images/rss_setting.png)
 
 RSS에서 활용한 주요 데이터는 다음과 같습니다.
 
@@ -127,7 +127,7 @@ RSS 모듈 실행 결과, 기사 제목(title), 링크(link), 발행일(pubDate)
 
 ### 캡처 5. RSS 수집 결과
 
-![RSS 수집 결과](images/05_rss_output.png)
+![RSS 수집 결과](images/rss_output.png)
 
 ---
 
@@ -163,9 +163,9 @@ RSS에서 수집되는 모든 뉴스를 요약하지 않고, 프로젝트 주제
 
 프로젝트에서 사용하는 키워드는 AI 관련 주제를 일관되게 선별하기 위해 관리합니다. 새로운 AI 기술이나 서비스가 등장하면 키워드를 추가하고, 사용 빈도가 낮거나 프로젝트 목적과 맞지 않는 키워드는 검토 후 수정합니다. 키워드 변경 시에는 README와 Make 시나리오를 함께 업데이트하여 동일한 조건으로 재현 가능한 필터링이 이루어지도록 관리합니다.
 
-### 캡처 3. 키워드 필터 설정
+### 캡처 6. 키워드 필터 설정
 
-![AI 키워드 필터](images/03_keyword_filter.png)
+![AI 키워드 필터](images/keyword_filter.png)
 
 ---
 
@@ -198,6 +198,10 @@ Equal to
 0
 ```
 
+#### GUID 선택 이유
+
+중복 확인 키로 RSS의 GUID를 사용한 이유는 기사마다 고유하게 제공되는 식별자이기 때문입니다. 링크(URL)는 추적 파라미터나 주소 형식이 변경될 수 있지만, GUID는 동일한 기사를 안정적으로 식별할 수 있어 중복 판별의 정확성과 재현성을 높일 수 있습니다.
+
 #### 적용 효과
 
 - 동일 뉴스의 중복 저장 방지
@@ -206,13 +210,13 @@ Equal to
 - 노션 데이터베이스의 데이터 정합성 유지
 - 중복 Discord 알림 방지
 
-### 캡처 4. GUID 검색 설정
+### 캡처 7. GUID 검색 설정
 
-![GUID 중복 검색](images/04_guid_search.png)
+![GUID 중복 검색](images/guid_search.png)
 
-### 캡처 5. 중복 통과 필터
+### 캡처 8. 중복 통과 필터
 
-![중복 통과 필터](images/05_duplicate_filter.png)
+![중복 통과 필터](images/duplicate_filter.png)
 
 ---
 
@@ -246,9 +250,9 @@ Equal to
 내용:{{2.rssFields.description}}
 ```
 
-### 캡처 6. Gemini 프롬프트
+### 캡처 9. Gemini 프롬프트
 
-![Gemini 프롬프트](images/06_gemini_prompt.png)
+![Gemini 프롬프트](images/gemini_prompt.png)
 
 ---
 
@@ -277,9 +281,9 @@ Parse JSON 모듈에서는 Gemini AI의 출력 결과를 입력값으로 받아 
 
 Parse JSON 모듈을 사용하지 않을 경우 Gemini AI의 반환값 전체가 하나의 문자열로 저장되므로, 필요한 항목을 개별적으로 활용하기 어렵습니다. 따라서 요약과 감성 분석 결과를 각각 사용할 수 있도록 Parse JSON 단계를 추가했습니다.
 
-### 캡처 7. Parse JSON 설정
+### 캡처 10. Parse JSON 설정
 
-![Parse JSON 설정](images/07_parse_json.png)
+![Parse JSON 설정](images/parse_json.png)
 
 ### **5.7 노션 데이터베이스 저장**
 
@@ -303,13 +307,13 @@ Google News RSS에서 제공하는 언론사 정보를 활용하기 위해 **출
 
 `GUID` 필드는 동일 기사의 저장 여부를 확인하고 신규 기사를 판별하는 용도로 사용합니다.
 
-### **캡처 8. 노션 데이터베이스 구조**
+### 캡처 11. 노션 데이터베이스 구조
 
-![노션 데이터베이스 구조](images/08_notion_database_fields.png)
+![노션 데이터베이스 구조](images/notion_database_fields.png)
 
-### 캡처 9. 노션 저장 결과
+### 캡처 12. 노션 저장 결과
 
-![노션 저장 결과](images/09_notion_result.png)
+![노션 저장 결과](images/notion_result.png)
 
 ---
 
@@ -330,13 +334,13 @@ Discord 메시지에는 다음 정보를 포함하도록 구성했습니다.
 
 이를 통해 팀원이 노션 데이터베이스를 직접 열지 않아도 Discord 채널에서 새로운 뉴스와 AI 요약, 감성 분석 결과를 실시간으로 확인할 수 있도록 구성했습니다.
 
-### 캡처 10. Discord 모듈 설정
+### 캡처 13. Discord 모듈 설정
 
-![Discord 모듈 설정](images/10_discord_module.png)
+![Discord 모듈 설정](images/discord_module.png)
 
-### 캡처 11. Discord 전송 결과
+### 캡처 14. Discord 전송 결과
 
-![Discord 전송 결과](images/11_discord_result.png)
+![Discord 전송 결과](images/discord_result.png)
 
 ---
 
@@ -351,6 +355,12 @@ Discord 메시지에는 다음 정보를 포함하도록 구성했습니다.
 | 동일 GUID가 이미 존재하는 경우 | Gemini, 노션 저장, Discord 전송을 실행하지 않음 | 중복 저장과 중복 알림 및 AI 호출 방지 |
 | Gemini 또는 외부 서비스 오류 | Make 실행 이력에서 오류 모듈과 데이터를 확인하고 재실행 | 오류 위치를 추적하고 안정적으로 복구 |
 | API 키 및 토큰 | Make Connection을 통해 비공개 관리 | 문서와 화면에서 인증정보 노출 방지 |
+
+#### 운영 정책
+
+- 오류가 발생한 경우 Make 실행 이력(History)을 통해 오류 원인을 확인합니다.
+- 오류 원인을 확인한 후 필요한 경우 해당 시나리오를 다시 실행합니다.
+- 정상 처리되지 않은 실행은 다음 Scheduler 실행과 별도로 확인하여 관리합니다.
 
 ---
 
@@ -464,17 +474,20 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
 │   ├── GUIDE.md
 │   └── BONUS.md
 └── images
-    ├── 01_make_workflow.png
-    ├── 02_scheduler.png
-    ├── 03_keyword_filter.png
-    ├── 04_guid_search.png
-    ├── 05_duplicate_filter.png
-    ├── 06_gemini_prompt.png
-    ├── 07_parse_json.png
-    ├── 08_notion_database_fields.png
-    ├── 09_notion_result.png
-    ├── 10_discord_module.png
-    └── 11_discord_result.png
+    ├── make_workflow.png
+    ├── scheduler.png
+    ├── keyword_filter.png
+    ├── scheduler_history.png
+    ├── guid_search.png
+    ├── rss_setting.png
+    ├── duplicate_filter.png
+    ├── rss_output.png
+    ├── gemini_prompt.png
+    ├── parse_json.png
+    ├── notion_database_fields.png
+    ├── notion_result.png
+    ├── discord_module.png
+    └── discord_result.png
 ```
 
 - `README.md` : 프로젝트 전체 설명 및 구현 과정
