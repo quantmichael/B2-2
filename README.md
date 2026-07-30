@@ -56,9 +56,10 @@ Duplicate Filter
 (검색 결과 0건만 통과)
       │
       ▼
-Google Gemini AI
-(요약 및 감성 분석)
+Google Gemini AI ─── 오류 발생 ───▶ Error Handler
+(요약 및 감성 분석)                  (최대 2회 Retry)
       │
+      │ 정상 처리
       ▼
 Parse JSON
 (summary / sentiment 분리)
@@ -490,6 +491,7 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
     ├── notion_result.png
     ├── discord_module.png
     └── discord_result.png
+    └── error_handler_retry.png
 ```
 
 - `README.md` : 프로젝트 전체 설명 및 구현 과정
