@@ -498,7 +498,7 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
 이미지 파일은 README와 같은 저장소의 `images` 폴더에 저장하고 다음과 같은 Markdown 문법으로 표시합니다.
 
 ```markdown
-![Make 전체 워크플로우](images/01_make_workflow.png)
+![Make 전체 워크플로우](images/make_workflow.png)
 ```
 
 ---
