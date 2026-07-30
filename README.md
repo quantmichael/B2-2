@@ -361,6 +361,9 @@ Discord 메시지에는 다음 정보를 포함하도록 구성했습니다.
 - Gemini AI 호출 오류는 Error Handler의 Retry 기능을 통해 최대 2회 자동 재시도합니다.
 - 자동 재시도 후에도 실패한 경우 Make 실행 이력(History)을 확인한 후 필요한 경우 수동으로 재실행합니다.
 
+> [!NOTE]
+> Make의 Error Handler는 Retry 이후 후속 모듈을 동일 시나리오에서 연결할 수 없는 구조이므로, 자동 알림 기능은 본 시나리오에는 포함하지 않았다.
+
 ### 캡처 15. Error Handler Retry 설정
 
 ![Error Handler Retry](images/error_handler_retry.png)
