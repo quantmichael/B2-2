@@ -108,6 +108,12 @@ https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko
 
 Google News RSS는 다양한 언론사의 최신 뉴스를 한 번에 수집할 수 있다는 장점이 있습니다. 수집된 뉴스의 발행 언론사를 구분하고 관리할 수 있도록 노션 데이터베이스에 `출처` 필드를 구성했습니다.
 
+또한 RSS 모듈의 Maximum number of returned items를 30으로 설정하여 하루 1회 실행 시 최신 뉴스를 충분히 수집한 후, AI 키워드 필터를 통해 프로젝트와 관련된 기사만 선별하도록 구성했습니다.
+
+### 캡처 4. Google News RSS 설정
+
+![Google News RSS 설정](images/04_rss_setting.png)
+
 RSS에서 활용한 주요 데이터는 다음과 같습니다.
 
 - 뉴스 제목
@@ -116,6 +122,12 @@ RSS에서 활용한 주요 데이터는 다음과 같습니다.
 - 뉴스 출처
 - GUID
 - RSS에서 제공하는 기사 설명 데이터
+
+RSS 모듈 실행 결과, 기사 제목(title), 링크(link), 발행일(pubDate), 출처(source), GUID 등의 정보가 정상적으로 수집되는 것을 확인했습니다.
+
+### 캡처 5. RSS 수집 결과
+
+![RSS 수집 결과](images/05_rss_output.png)
 
 ---
 
