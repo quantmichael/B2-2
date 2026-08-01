@@ -493,7 +493,7 @@ Make를 이용하여 Google News RSS 수집부터 AI 키워드 필터링, GUID �
     ├── notion_database_fields.png
     ├── notion_result.png
     ├── discord_module.png
-    └── discord_result.png
+    ├── discord_result.png
     └── error_handler_retry.png
 ```
 
