@@ -94,7 +94,7 @@ Notion Create Database Item 모듈에서 아래와 같이 매핑합니다.
 
 ## 6. MAKE 워크플로우
 
-![MAKE 워크플로우](./bonus.png)
+![MAKE 워크플로우](../images/bonus.png)
 
 ## 7. 실행 결과
 
